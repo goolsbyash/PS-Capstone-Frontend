@@ -6,6 +6,8 @@ import { Route, Routes } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import { UserContext } from "./context/UserContext";
 import Dashboard from "./pages/Dashboard";
+import Settings from "./pages/Settings";
+import BuildPlan from "./pages/BuildPlan";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -23,14 +25,15 @@ function App() {
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
-      {/* <form onSubmit={handleSubmit}> */}
       <h1>BodyMorph App</h1>
       {user ? (
         <>
-          <NavBar/>
+          <NavBar user={user}/>
           <Routes>
-            <Route path={`/dashboard/user/${user}`} element={<Dashboard />} />
-            <Route path="/dashboard/plans" />
+            <Route path="/" element={<Dashboard user={user}/>} />
+            <Route path={`/${user._id}/buildplan`} element={<BuildPlan/>}/>
+            <Route path={`/${user._id}/settings`} element={<Settings/>}/>
+            // TODO: Route for log out
           </Routes>
         </>
       ) : (
