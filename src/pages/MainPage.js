@@ -11,7 +11,7 @@ export default function MainPage() {
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
 
-  const handleSubmit = async (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
 
     try {
@@ -22,7 +22,9 @@ export default function MainPage() {
         password: passwordRef.current.value,
       });
       console.log(res.data);
-      setUser(res.data);
+      setUser(res.data.firstName);
+      // store user in local storage
+      localStorage.setItem('user', res.data); 
     } catch (error) {
       console.log(error);
     }
@@ -38,6 +40,7 @@ export default function MainPage() {
       });
       console.log(res.data);
       setUser(res.data);
+      localStorage.setItem('user', res.data)
     } catch (error) {
       console.log(error);
     }
@@ -48,7 +51,7 @@ export default function MainPage() {
       <h1>Main Page</h1>
       {showSignUp ? (
         <>
-          <form onSubmit={handleSubmit} id="signupForm">
+          <form onSubmit={handleSignup} id="signupForm">
             <input
               type="text"
               name="firstName"
