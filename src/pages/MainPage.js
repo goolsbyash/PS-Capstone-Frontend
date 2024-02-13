@@ -24,7 +24,7 @@ export default function MainPage() {
       console.log(res.data);
       setUser(res.data.firstName);
       // store user in local storage
-      localStorage.setItem('user', res.data); 
+      await localStorage.setItem('user', JSON.stringify(res.data)); 
     } catch (error) {
       console.log(error);
     }
@@ -40,7 +40,7 @@ export default function MainPage() {
       });
       console.log(res.data);
       setUser(res.data);
-      localStorage.setItem('user', res.data)
+      await localStorage.setItem('user', res.data)
     } catch (error) {
       console.log(error);
     }
