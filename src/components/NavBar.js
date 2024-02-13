@@ -1,23 +1,42 @@
 import { Link } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
+import { useContext } from "react";
 
-export default function NavBar({user}) {
-  const {firstName, _id} = user;
+export default function NavBar({ user }) {
+  const { firstName, _id } = user;
+  const userCtx = useContext(UserContext);
+  const { setUser } = userCtx;
+  const handleLogout = (e) => {
+    e.preventDefault();
+    setUser({});
+    localStorage.clear();
+  };
 
   return (
     <nav>
       <ul>
         <li>Welcome {firstName},</li>
         <li>
-          <Link to="/">Dashboard</Link>
+          <Link to="/">
+            <button>Dashboard</button>
+          </Link>
         </li>
         <li>
-          <Link to={`/${_id}/buildplan`}>Build Custom Plan</Link>
+          <Link to={`/${_id}/buildplan`}>
+            <button>Build Custom Plan</button>
+          </Link>
         </li>
         <li>
-          <button><Link to={`/${_id}/settings`}>Settings</Link></button>
+          <Link to={`/${_id}/settings`}>
+            <button>Settings</button>
+          </Link>
         </li>
         <li>
-          <Link to="/">Log Out</Link>
+          <Link to="/logout">
+            <button type="submit" onClick={handleLogout}>
+              Log Out
+            </button>
+          </Link>
         </li>
       </ul>
     </nav>
