@@ -1,14 +1,19 @@
 import axios from "axios";
+import { useContext } from "react";
+import { Link } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
 
 export default function Settings({ user }) {
   const { _id } = user;
+  const userCtx = useContext(UserContext);
+  const { setUser } = userCtx;
   const handleUpdate = (e) => {
     e.preventDefault();
     // TODO: post/patch request to backend to update setting
   };
 
   const handleDelete = async (e) => {
-    e.preventDefault();
+    // e.preventDefault();
     if (
       window.confirm(
         "Are you abosolutely sure you want to delete your account?"
@@ -21,6 +26,11 @@ export default function Settings({ user }) {
         const res2 = await axios.delete(
           `http://localhost:4000/api/exercises/owner/${_id}`
         );
+        if (res && res2) {
+          localStorage.clear();
+          setUser(null);
+        }
+        // else
       } catch (error) {
         console.log(error);
       }
@@ -54,9 +64,11 @@ export default function Settings({ user }) {
         </button>
       </form>
       <br />
-      <button type="submit" onClick={handleDelete}>
-        Delete Account
-      </button>
+      <Link to="/logout">
+        <button type="submit" onClick={handleDelete}>
+          Delete Account
+        </button>
+      </Link>
     </div>
   );
 }
