@@ -8,7 +8,7 @@ export default function NavBar({ user }) {
   const { setUser } = userCtx;
   const handleLogout = (e) => {
     e.preventDefault();
-    setUser({});
+    setUser(null);
     localStorage.clear();
   };
 
