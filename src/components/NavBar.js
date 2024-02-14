@@ -7,7 +7,6 @@ export default function NavBar({ user }) {
   const userCtx = useContext(UserContext);
   const { setUser } = userCtx;
   const handleLogout = (e) => {
-    e.preventDefault();
     setUser(null);
     localStorage.clear();
   };
@@ -32,7 +31,7 @@ export default function NavBar({ user }) {
           </Link>
         </li>
         <li>
-          <Link to="/logout">
+          <Link to="/">
             <button type="submit" onClick={handleLogout}>
               Log Out
             </button>
