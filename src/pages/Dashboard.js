@@ -5,6 +5,10 @@ import { useEffect, useState } from "react";
 export default function Dashboard({ user }) {
   const { activePlan, _id } = user;
   const [viewPlan, setViewPlan] = useState(null);
+
+  {
+    /* make GET request db by owner id */
+  }
   useEffect(() => {
     const fetchPlans = async () => {
       try {
@@ -45,7 +49,6 @@ export default function Dashboard({ user }) {
         </Link>
       )}
       {/* if number of saved plans is less than 4, include add more buttton */}
-      {/* make GET request db by owner id */}
     </div>
   );
 }
