@@ -19,10 +19,10 @@ export default function Settings() {
     ) {
       try {
         const res = await axios.delete(
-          `http://localhost:4000/api/users/${user._id}/delete`
+          `https://bodymorph-backend.onrender.com/api/users/${user._id}/delete`
         );
         const res2 = await axios.delete(
-          `http://localhost:4000/api/exercises/owner/${user._id}`
+          `https://bodymorph-backend.onrender.com/api/exercises/owner/${user._id}`
         );
         if (res && res2) {
           localStorage.clear();
@@ -62,7 +62,7 @@ export default function Settings() {
         </button>
       </form>
       <br />
-      <Link to="/logout">
+      <Link to="/">
         <button type="submit" onClick={handleDelete}>
           Delete Account
         </button>

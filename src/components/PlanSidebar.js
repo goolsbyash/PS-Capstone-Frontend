@@ -1,5 +1,5 @@
 import SidePlanList from "./SidePlanList";
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef } from "react";
 import { NewPlanContext } from "../context/NewPlanContext";
 import { UserContext } from "../context/UserContext";
 import axios from "axios";
@@ -27,7 +27,7 @@ export default function PlanSidebar() {
     addPlan.name = customNameRef.current.value;
     console.log(addPlan);
     try {
-        const res = axios.post("http://localhost:4000/api/exercises", addPlan);
+        const res = axios.post("https://bodymorph-backend.onrender.com/api/exercises", addPlan);
         console.log(res.data);
     } catch (error) {
         console.log(error);

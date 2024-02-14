@@ -15,7 +15,7 @@ export default function Dashboard() {
     const fetchPlans = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:4000/api/exercises/owner/${user._id}`
+          `https://bodymorph-backend.onrender.com/api/exercises/owner/${user._id}`
         );
         // const data = await res.json();
         console.log(res);
@@ -32,7 +32,7 @@ export default function Dashboard() {
     const fetchActivePlans = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:4000/api/exercises/active/${user._id}`
+          `https://bodymorph-backend.onrender.com/api/exercises/active/${user._id}`
         );
         console.log(res.data);
         setActivePlan(res.data);
@@ -47,7 +47,7 @@ export default function Dashboard() {
     e.preventDefault();
     // if (window.confirm(`Delete Plan: ${viewPlan.name}`)) {
     //   const res = await axios.delete(
-    //     `http://localhost:4000/api/exercises/${viewPlan._id}/delete`
+    //     `https://bodymorph-backend.onrender.com/api/exercises/${viewPlan._id}/delete`
     //   )
     //   if (res) {
     //     setViewPlan(null);
