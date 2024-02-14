@@ -34,7 +34,7 @@ function App() {
     if (activeUser) {
       const foundUser = JSON.parse(activeUser);
       console.log(foundUser);
-      setUser({firstName: foundUser.firstName, _id: foundUser._id});
+      setUser({ firstName: foundUser.firstName, _id: foundUser._id });
     } else {
       setUser(null);
     }
@@ -42,7 +42,7 @@ function App() {
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
-      <NewPlanContext.Provider value={{newPlan, setNewPlan}}>
+      <NewPlanContext.Provider value={{ newPlan, setNewPlan }}>
         <h1>BodyMorph App</h1>
         {user ? (
           <>
@@ -58,7 +58,7 @@ function App() {
                 element={<Settings user={user} />}
               />
               // TODO: Route for log out
-              <Route path="/logout"/>
+              <Route path="/logout" />
             </Routes>
           </>
         ) : (
