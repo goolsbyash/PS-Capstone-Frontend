@@ -35,6 +35,8 @@ function App() {
       const foundUser = JSON.parse(activeUser);
       console.log(foundUser);
       setUser({firstName: foundUser.firstName, _id: foundUser._id});
+    } else {
+      setUser(null);
     }
   }, []);
 
