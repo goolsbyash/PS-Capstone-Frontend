@@ -1,19 +1,21 @@
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { UserContext } from "../context/UserContext";
 
-export default function Dashboard({ user }) {
-  const { activePlan, _id } = user;
+export default function Dashboard() {
+  const userCtx = useContext(UserContext);
+  const { user } = userCtx;
   const [viewPlan, setViewPlan] = useState(null);
+  const [activePlan, setActivePlan] = useState(null);
 
-  {
-    /* make GET request db by owner id */
-  }
+  //* GET request to db to fetch all plans by owner id */
+
   useEffect(() => {
     const fetchPlans = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:4000/api/plans/owner/${_id}`
+          `http://localhost:4000/api/exercises/owner/${user._id}`
         );
         // const data = await res.json();
         console.log(res.data);
@@ -25,26 +27,57 @@ export default function Dashboard({ user }) {
     fetchPlans();
   }, []);
 
+  // GET request to fetch active plan(s)
+  useEffect(() => {
+    const fetchActivePlans = async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:4000/api/exercises/active/${user._id}`
+        );
+        console.log(res.data);
+        setActivePlan(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchActivePlans();
+  }, []);
+
   return (
     <div>
       <h2>Dashboard</h2>
-      <h3>Active Plan</h3>
+      <h4>Active Plan</h4>
       {/* if no active plan, show button to link to /buildplan */}
       {activePlan ? (
-        <h4>{activePlan}</h4>
+        activePlan.map((plan) => (
+          <ul>
+            <li>
+              <h5>{plan.name}</h5>
+            </li>
+          </ul>
+        ))
       ) : (
-        <Link to={`/${_id}/buildplan`}>
+        <Link to={`/${user._id}/buildplan`}>
           <button>No Active Plan? Build One</button>
         </Link>
       )}
-      <h3>Saved Plans</h3>
+      <h4>Saved Plans</h4>
       {/* if no saved plan, show button to link to /buildplan */}
       {viewPlan ? (
-        <Link to={`/${_id}/buildplan`}>
-          {viewPlan.length < 4 && <button>Add New Plan</button>}
-        </Link>
+        <>
+          {viewPlan.map((plan) => (
+            <ul>
+              <li>
+                <h5>{plan.name}</h5>
+              </li>
+            </ul>
+          ))}
+          <Link to={`/${user._id}/buildplan`}>
+            {viewPlan.length < 4 && <button>Add New Plan</button>}
+          </Link>
+        </>
       ) : (
-        <Link to={`/${_id}/buildplan`}>
+        <Link to={`/${user._id}/buildplan`}>
           <button>No Saved Plan? Build One</button>
         </Link>
       )}
