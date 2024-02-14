@@ -45,19 +45,17 @@ function App() {
         <h1>BodyMorph App</h1>
         {user ? (
           <>
-            <NavBar user={user} />
+            <NavBar />
             <Routes>
-              <Route path="/" element={<Dashboard user={user} />} />
+              <Route path="/" element={<Dashboard/>} />
               <Route
                 path={`/${user._id}/buildplan`}
                 element={<BuildPlan exercises={exercises} />}
               />
               <Route
                 path={`/${user._id}/settings`}
-                element={<Settings user={user} />}
+                element={<Settings/>}
               />
-              // TODO: Route for log out
-              <Route path="/logout" />
             </Routes>
           </>
         ) : (
