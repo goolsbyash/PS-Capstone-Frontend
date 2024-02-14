@@ -2,10 +2,9 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { useContext } from "react";
 
-export default function NavBar({ user }) {
-  const { firstName, _id } = user;
+export default function NavBar() {
   const userCtx = useContext(UserContext);
-  const { setUser } = userCtx;
+  const { user, setUser } = userCtx;
   const handleLogout = (e) => {
     setUser(null);
     localStorage.clear();
@@ -14,19 +13,19 @@ export default function NavBar({ user }) {
   return (
     <nav>
       <ul>
-        <li>Welcome {firstName},</li>
+        <li>Welcome {user.firstName},</li>
         <li>
           <Link to="/">
             <button>Dashboard</button>
           </Link>
         </li>
         <li>
-          <Link to={`/${_id}/buildplan`}>
+          <Link to={`/${user._id}/buildplan`}>
             <button>Build Custom Plan</button>
           </Link>
         </li>
         <li>
-          <Link to={`/${_id}/settings`}>
+          <Link to={`/${user._id}/settings`}>
             <button>Settings</button>
           </Link>
         </li>
