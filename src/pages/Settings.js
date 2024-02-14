@@ -3,17 +3,15 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 
-export default function Settings({ user }) {
-  const { _id } = user;
+export default function Settings() {
   const userCtx = useContext(UserContext);
-  const { setUser } = userCtx;
+  const { user, setUser } = userCtx;
   const handleUpdate = (e) => {
     e.preventDefault();
     // TODO: post/patch request to backend to update setting
   };
 
   const handleDelete = async (e) => {
-    // e.preventDefault();
     if (
       window.confirm(
         "Are you abosolutely sure you want to delete your account?"
@@ -21,10 +19,10 @@ export default function Settings({ user }) {
     ) {
       try {
         const res = await axios.delete(
-          `http://localhost:4000/api/users/${_id}/delete`
+          `http://localhost:4000/api/users/${user._id}/delete`
         );
         const res2 = await axios.delete(
-          `http://localhost:4000/api/exercises/owner/${_id}`
+          `http://localhost:4000/api/exercises/owner/${user._id}`
         );
         if (res && res2) {
           localStorage.clear();

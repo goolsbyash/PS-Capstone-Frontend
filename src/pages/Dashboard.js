@@ -18,14 +18,14 @@ export default function Dashboard() {
           `http://localhost:4000/api/exercises/owner/${user._id}`
         );
         // const data = await res.json();
-        console.log(res.data);
+        console.log(res);
         setViewPlan(res.data);
       } catch (error) {
         console.log(error);
       }
     };
     fetchPlans();
-  }, []);
+  }, [user._id]);
 
   // GET request to fetch active plan(s)
   useEffect(() => {
@@ -41,7 +41,19 @@ export default function Dashboard() {
       }
     };
     fetchActivePlans();
-  }, []);
+  }, [user._id]);
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    // if (window.confirm(`Delete Plan: ${viewPlan.name}`)) {
+    //   const res = await axios.delete(
+    //     `http://localhost:4000/api/exercises/${viewPlan._id}/delete`
+    //   )
+    //   if (res) {
+    //     setViewPlan(null);
+    //   }
+    // }
+  }
 
   return (
     <div>
@@ -69,6 +81,7 @@ export default function Dashboard() {
             <ul>
               <li>
                 <h5>{plan.name}</h5>
+                <button type="submit" onClick={handleDelete}>Delete Plan</button>
               </li>
             </ul>
           ))}
