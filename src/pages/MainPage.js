@@ -22,7 +22,7 @@ export default function MainPage() {
         password: passwordRef.current.value,
       });
       console.log(res.data);
-      setUser(res.data.firstName);
+      setUser(res.data);
       // store user in local storage
       await localStorage.setItem('user', JSON.stringify(res.data)); 
     } catch (error) {
