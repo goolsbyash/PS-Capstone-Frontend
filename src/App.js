@@ -13,7 +13,6 @@ import BuildPlan from "./pages/BuildPlan";
 function App() {
   const [user, setUser] = useState(null);
   const [exercises, setExercises] = useState([]);
-  const [activePlan, setActivePlan] = useState(null);
   const [newPlan, setNewPlan] = useState([]);
 
   useEffect(() => {
