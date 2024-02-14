@@ -1,7 +1,30 @@
+import axios from "axios";
+
 export default function Settings({ user }) {
   const { _id } = user;
   const handleUpdate = (e) => {
     e.preventDefault();
+    // TODO: post/patch request to backend to update setting
+  };
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    if (
+      window.confirm(
+        "Are you abosolutely sure you want to delete your account?"
+      )
+    ) {
+      try {
+        const res = await axios.delete(
+          `http://localhost:4000/api/users/${_id}/delete`
+        );
+        const res2 = await axios.delete(
+          `http://localhost:4000/api/exercises/owner/${_id}`
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
 
   return (
@@ -26,7 +49,14 @@ export default function Settings({ user }) {
           name="newPassword2"
           placeholder="Confirm New Password:"
         />
+        <button type="submit" onClick={handleUpdate}>
+          Update Account
+        </button>
       </form>
+      <br />
+      <button type="submit" onClick={handleDelete}>
+        Delete Account
+      </button>
     </div>
   );
 }
