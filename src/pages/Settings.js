@@ -1,14 +1,29 @@
 import axios from "axios";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 
 export default function Settings() {
   const userCtx = useContext(UserContext);
   const { user, setUser } = userCtx;
-  const handleUpdate = (e) => {
+
+  const firstNameRef = useRef(null);
+  const emailRef = useRef(null);
+
+  const handleUpdate = async (e) => {
     e.preventDefault();
-    // TODO: post/patch request to backend to update setting
+    const update = {
+      firstName: firstNameRef.current.value,
+      email: emailRef.current.value,
+    };
+    const res = await axios.patch(
+      `https://bodymorph-backend.onrender.com//api/users/${user._id}/update`,
+      update
+    );
+    if (res) {
+      setUser(res.data.firstName);
+      localStorage.setItem("user", JSON.stringify(res.data));
+    } else window.alert("Something went wrong. Update unsuccesful.");
   };
 
   const handleDelete = async (e) => {
@@ -24,7 +39,7 @@ export default function Settings() {
         const res2 = await axios.delete(
           `https://bodymorph-backend.onrender.com/api/exercises/owner/${user._id}`
         );
-        if (res && res2) {
+        if (res || res2) {
           localStorage.clear();
           setUser(null);
         }
@@ -38,24 +53,18 @@ export default function Settings() {
   return (
     <div>
       <h2>Account Settings</h2>
-      <form onSubmit={handleUpdate}>
-        <input type="text" name="firstName" placeholder="First Name:" />
-        <input type="text" name="lastName" placeholder="Last Name:" />
-        <input type="email" name="email" placeholder="Update email:" />
+      <form>
         <input
-          type="password"
-          name="oldPassword"
-          placeholder="Current Password:"
+          type="text"
+          name="firstName"
+          placeholder="First Name:"
+          ref={firstNameRef}
         />
         <input
-          type="password"
-          name="newPassword"
-          placeholder="Enter New Password:"
-        />
-        <input
-          type="password"
-          name="newPassword2"
-          placeholder="Confirm New Password:"
+          type="email"
+          name="email"
+          placeholder="Update email:"
+          ref={emailRef}
         />
         <button type="submit" onClick={handleUpdate}>
           Update Account
