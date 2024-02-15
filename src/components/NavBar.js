@@ -12,8 +12,10 @@ export default function NavBar() {
 
   return (
     <nav>
+      <p><b>Welcome {user.firstName},</b></p>
+
       <ul>
-        <li>Welcome {user.firstName},</li>
+        <li></li>{" "}
         <li>
           <Link to="/">
             <button>Dashboard</button>

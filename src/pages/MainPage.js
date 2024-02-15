@@ -15,7 +15,7 @@ export default function MainPage() {
     e.preventDefault();
 
     try {
-      const res = await axios.post("https://bodymorph-backend.onrender.com/api/users/signup", {
+      const res = await axios.post("http://localhost:4000/api/users/signup", {
         firstName: firstNameRef.current.value,
         lastName: lastNameRef.current.value,
         email: emailRef.current.value,
@@ -24,7 +24,7 @@ export default function MainPage() {
       console.log(res.data);
       setUser(res.data);
       // store user in local storage
-      await localStorage.setItem('user', JSON.stringify(res.data)); 
+      await localStorage.setItem("user", JSON.stringify(res.data));
     } catch (error) {
       console.log(error);
     }
@@ -34,24 +34,24 @@ export default function MainPage() {
     e.preventDefault();
 
     try {
-      const res = await axios.post("https://bodymorph-backend.onrender.com/api/users/signin", {
+      const res = await axios.post("http://localhost:4000/api/users/signin", {
         email: emailRef.current.value,
         password: passwordRef.current.value,
       });
       console.log(res.data);
       setUser(res.data);
-      await localStorage.setItem('user', res.data)
+      await localStorage.setItem("user", res.data);
     } catch (error) {
       console.log(error);
     }
   };
 
   return (
-    <main>
-      <h1>Main Page</h1>
+    <main id="welcome">
+      <h3>Welcome!</h3>
       {showSignUp ? (
-        <>
-          <form onSubmit={handleSignup} id="signupForm">
+        <div id="formWrapper">
+          <form className="welcomeForm" onSubmit={handleSignup} id="signupForm">
             <input
               type="text"
               name="firstName"
@@ -82,10 +82,10 @@ export default function MainPage() {
             Have an account already? {"  "}
             <button onClick={() => setShowSignUp(!showSignUp)}>Sign In</button>
           </span>
-        </>
+        </div>
       ) : (
         <>
-          <form onSubmit={handleSignin} id="signinForm">
+          <form className="welcomeForm" onSubmit={handleSignin} id="signinForm">
             <input
               type="email"
               name="email"

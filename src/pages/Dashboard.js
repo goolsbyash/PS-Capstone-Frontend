@@ -81,7 +81,7 @@ export default function Dashboard() {
             <ul>
               <li>
                 <h5>{plan.name}</h5>
-                <button type="submit" onClick={handleDelete}>Delete Plan</button>
+                {/* <button type="submit" onClick={handleDelete}>Delete Plan</button> */}
               </li>
             </ul>
           ))}

@@ -6,7 +6,7 @@ import axios from "axios";
 
 export default function PlanSidebar() {
   const planCtx = useContext(NewPlanContext);
-  const { newPlan } = planCtx;
+  const { newPlan, setNewPlan } = planCtx;
   const userCtx = useContext(UserContext);
   const { user } = userCtx;
   const customNameRef = useRef(null);
@@ -21,21 +21,28 @@ export default function PlanSidebar() {
     } else addPlan.active = true;
     console.log(addPlan);
   };
-  const handleSavePlan = (e) => {
+  const handleSavePlan = async (e) => {
     e.preventDefault();
     // add exercise plan to db with user's _id
     addPlan.name = customNameRef.current.value;
     console.log(addPlan);
     try {
-        const res = axios.post("https://bodymorph-backend.onrender.com/api/exercises", addPlan);
-        console.log(res.data);
+      const res = await axios.post(
+        "https://bodymorph-backend.onrender.com/api/exercises",
+        addPlan
+      );
+      console.log(res.data);
+      if (res.data) {
+        window.alert("Plan saved successfully");
+        setNewPlan([]);
+      } else window.alert("Something went wrong. Try again!");
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
   };
 
   return (
-    <div style={{ float: "right" }}>
+    <div id="newPlan">
       {/* render newPlan useState */}
       <h3>New Workout Plan</h3>
       <SidePlanList />

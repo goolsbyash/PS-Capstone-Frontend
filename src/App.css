@@ -1,19 +1,65 @@
-.App {
-  text-align: center;
+html {
+  background: url("https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#root {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 50%;
+  /* top: 30%; */
+  transform: translate(-50%, -10%);
+  justify-content: center;  
+  /* border: 2px solid #258EA6; */
+  background-color: #7E848A;
+  padding: 10%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  /* height: 80%; */
+  background-size: auto;
 }
 
-.App-header {
+.welcomeForm {
+  display: flex;
+  flex-direction: column;
+  padding: 2%;
+}
+
+#welcome {
+  background-color: #666699;
+  padding: 5px;
+  width: 30%;
+  border: 2px solid gray;
+  position: relative;
+  width: 300px;
+}
+#root > nav > ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+}
+
+#planView {
+  overflow: hidden;
+}
+
+#exerciseList {
+  float: left;
+}
+
+#newPlan {
+  float: right;
+  overflow: hidden;
+  border: 2px solid;
+  padding: 6px;
+}
+
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -22,17 +68,4 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+} */

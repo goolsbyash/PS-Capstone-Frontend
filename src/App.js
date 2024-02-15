@@ -18,7 +18,7 @@ function App() {
   useEffect(() => {
     // fetch data from API
     const fetchData = async () => {
-      const res = await fetch("https://wger.de/api/v2/exercise/?language=2");
+      const res = await fetch("https://wger.de/api/v2/exercise/?%3Flimit=30&language=2&limit=10&offset=100");
       const data = await res.json();
       console.log(data.results);
       setExercises(data.results);
@@ -42,7 +42,7 @@ function App() {
   return (
     <UserContext.Provider value={{ user, setUser }}>
       <NewPlanContext.Provider value={{ newPlan, setNewPlan }}>
-        <h1>BodyMorph App</h1>
+        <h1>BodyMorph</h1>
         {user ? (
           <>
             <NavBar />

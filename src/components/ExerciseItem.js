@@ -56,7 +56,7 @@ export default function ExerciseItem({ exercise }) {
       ) : (
         <>
           <h4>{name}</h4>
-          {description}
+          {/* {description} */}
           <button type="submit" onClick={handleAddPlan}>
             Add to plan
           </button>
