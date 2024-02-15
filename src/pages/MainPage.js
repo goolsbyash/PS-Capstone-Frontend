@@ -15,7 +15,7 @@ export default function MainPage() {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:4000/api/users/signup", {
+      const res = await axios.post("https://bodymorph-backend.onrender.com/api/users/signup", {
         firstName: firstNameRef.current.value,
         lastName: lastNameRef.current.value,
         email: emailRef.current.value,
@@ -34,7 +34,7 @@ export default function MainPage() {
     e.preventDefault();
 
     try {
-      const res = await axios.post("http://localhost:4000/api/users/signin", {
+      const res = await axios.post("https://bodymorph-backend.onrender.com/api/users/signin", {
         email: emailRef.current.value,
         password: passwordRef.current.value,
       });
