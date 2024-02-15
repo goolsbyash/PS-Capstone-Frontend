@@ -17,7 +17,7 @@ export default function Settings() {
       email: emailRef.current.value,
     };
     const res = await axios.patch(
-      `https://bodymorph-backend.onrender.com//api/users/${user._id}/update`,
+      `https://bodymorph-backend.onrender.com/api/users/${user._id}/update`,
       update
     );
     if (res) {
